@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "description": "Extension functions and parameters for JavaScript inspired by Kotlin's extensions",
   "main": "lib/index.macro.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "ava",
     "clean": "rimraf lib tests",
     "build-test": "babel pre-tests --out-dir tests",
     "re-test": "rimraf tests && npm run build-test && npm test",
-    "build": "npm run clean && babel src --out-dir lib && npm run build-test"
+    "build": "npm run clean && babel src --out-dir lib && npm run build-test",
+    "prepublishOnly": "npm run build && npm test"
   },
   "author": "fkrasnowski",
   "license": "MIT",
