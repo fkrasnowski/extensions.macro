@@ -150,6 +150,15 @@ extension.String.plus = (string) => (plusString) => `${string} + ${plusString}`;
 (5).plus(2); ////Outputs 7
 ```
 
+### Extension parameters
+
+You might overlook that you needn't return function from extension
+
+```js
+extension.Array.last = (arr) => arr[arr.length - 1];
+console.log(['🥞', '💋'].last); //Logs: 💋
+```
+
 ## To Do
 
 - Add `Import` and `Export` feature for extension
