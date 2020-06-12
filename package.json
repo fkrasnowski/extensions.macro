@@ -24,6 +24,13 @@
     "url": "https://github.com/fkrasnowski/extensions.macro/issues"
   },
   "homepage": "https://github.com/fkrasnowski/extensions.macro#readme",
+  "keywords": [
+    "babel",
+    "babel-macros",
+    "extension-methods",
+    "extension-functions",
+    "parameters"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
