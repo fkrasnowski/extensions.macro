@@ -2,7 +2,7 @@
 
 Extension functions and parameters for JavaScript inspired by Kotlin's extensions
 
-## Instalation
+## Installation
 
 ```sh
 npm i --save-dev extensions.macro
@@ -17,22 +17,22 @@ yarn add --dev extensions.macro
 Then just `import`:
 
 ```js
-import extension from 'extensions.macro';
+import extension from 'extensions.macro'
 ```
 
 > Note that you need to have _`babel`_ and _`babel-plugin-macros`_ installed
 
 ## Motivation
 
-As you might know that providing new properties for JavaScript built-in objects pollutes the global scope and is widely considered dangerously. This macro solves the problem allowing you to use dot notation for accesing external functions and values 😋
+As you might know - providing new properties to JavaScript built-in objects pollutes the global scope and is widely considered unsafe. This macro solves the problem allowing you to use dot notation to access external functions and properties 😋
 
 ## Examples
 
 ### Declaring extension
 
 ```js
-import extension from 'extensions.macro';
-extension.String.plus = (string) => (plusString) => `${string} ${plusString}`;
+import extension from 'extensions.macro'
+extension.String.plus = string => plusString => `${string} ${plusString}`
 ```
 
 > Note that it's initialized with function witch first argumument( _`string`_ ) provides an instance it's called on.
@@ -40,20 +40,20 @@ extension.String.plus = (string) => (plusString) => `${string} ${plusString}`;
 Then you can use it like:
 
 ```js
-'Hello'.plus('Extension!'); //Outputs: Hello Extension!
+'Hello'.plus('Extension!') //Outputs: Hello Extension!
 ```
 
 ### Another example:
 
 ```js
-import extension from 'extensions.macro';
+import extension from 'extensions.macro'
 
-extension.any.log = (obj) => () => {
-  console.log(obj);
-  return obj;
-};
+extension.any.log = obj => () => {
+  console.log(obj)
+  return obj
+}
 
-'The cosmos is yours 🌌'.log();
+'The cosmos is yours 🌌'.log()
 //Logs: The cosmos is yours 🌌
 ```
 
@@ -63,10 +63,10 @@ extension.any.log = (obj) => () => {
 
 ### Object constructor name
 
-It's the result of calling `.constructor.name` on object the extension it's dedicated
+It's the result of calling `.constructor.name` on object the extension is dedicated for
 
 ```js
-(15).constructor.name; //Outputs: Number
+;(15).constructor.name //Outputs: Number
 ```
 
 #### extension.any...
@@ -75,11 +75,11 @@ You can write `any` instead of constructor name to match any type of object
 
 ### Extension name
 
-It's the name of extension you choose
+It's the name of the extension you choose
 
 ### Init
 
-It's the function taking object and returning what should extension return
+It's the function that takes an object and returns what should extension return
 
 ## Rules
 
@@ -91,11 +91,11 @@ It's the function taking object and returning what should extension return
 
 ```js
 //...
-import curry from '@ramda/curry';
+import curry from '@ramda/curry'
 
-extension.Function.curry = (fun) => curry(fun); //✔
+extension.Function.curry = fun => curry(fun) //✔
 {
-  extension.Function.curry = (fun) => curry(fun); //❌Throws: Error
+  extension.Function.curry = fun => curry(fun) //❌Throws: Error
 }
 //...
 ```
@@ -103,12 +103,12 @@ extension.Function.curry = (fun) => curry(fun); //✔
 ### Extensions do not override object properties
 
 ```js
-extension.any.reduce = (obj) => (reducer) => reducer(obj);
+extension.any.reduce = obj => reducer => reducer(obj)
 
-'Who let the dogs out!?'.reduce((v) => `${v} wow! wow! wow!`);
+'Who let the dogs out!?'.reduce(v => `${v} wow! wow! wow!`)
 //Outputs: Who let the dogs out!? wow! wow! wow!
 
-[1, 2, 3].reduce((total, value) => total + value);
+;[1, 2, 3].reduce((total, value) => total + value)
 //Outputs: 6
 ```
 
@@ -117,37 +117,37 @@ extension.any.reduce = (obj) => (reducer) => reducer(obj);
 Though you can do it but it does not very performant and is considered to be blocked in future versions
 
 ```js
-extension.Number.factorial = (num) => () => {
-  if (num === 1 || num === 0) return 1;
-  return num * (num - 1).factorial();
-};
-//Works, but is bad ❗
+extension.Number.factorial = num => () => {
+  if (num === 1 || num === 0) return 1
+  return num * (num - 1).factorial()
+}
+//Works, but it's bad ❗
 ```
 
 Do instead:
 
 ```js
-const factorial = (num) => {
-  if (num === 1 || num === 0) return 1;
-  return num * factorial(num - 1);
-};
+const factorial = num => {
+  if (num === 1 || num === 0) return 1
+  return num * factorial(num - 1)
+}
 
-extension.Number.factorial = (num) => () => factorial(num);
+extension.Number.factorial = num => () => factorial(num)
 //Right way ✅
 ```
 
-## Another features
+## Other features
 
-### Extensions overloading
+### Extension overloading
 
 You can overload `any` extension like so:
 
 ```js
-extension.any.plus = (obj) => (plusObj) => obj + plusObj;
-extension.String.plus = (string) => (plusString) => `${string} + ${plusString}`;
+extension.any.plus = obj => plusObj => obj + plusObj
+extension.String.plus = string => plusString => `${string} + ${plusString}`
 
-'👽'.plus('💩'); //Outputs 👽 + 💩
-(5).plus(2); ////Outputs 7
+'👽'.plus('💩') //Outputs 👽 + 💩
+;(5).plus(2) ////Outputs 7
 ```
 
 ### Extension parameters
@@ -155,8 +155,8 @@ extension.String.plus = (string) => (plusString) => `${string} + ${plusString}`;
 You might overlook that you needn't return function from extension
 
 ```js
-extension.Array.last = (arr) => arr[arr.length - 1];
-console.log(['🥞', '💋'].last); //Logs: 💋
+extension.Array.last = arr => arr[arr.length - 1]
+console.log(['🥞', '💋'].last) //Logs: 💋
 ```
 
 ## To Do
