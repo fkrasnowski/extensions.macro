@@ -1,6 +1,6 @@
 {
   "name": "extensions.macro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extension functions and parameters for JavaScript inspired by Kotlin's extensions",
   "main": "lib/index.macro.js",
   "files": [
@@ -8,10 +8,9 @@
   ],
   "scripts": {
     "test": "ava",
-    "clean": "rimraf lib tests",
     "build:test": "babel pre-tests --out-dir tests",
-    "re-test": "rimraf tests && npm run build:test && npm test",
-    "build": "npm run clean && babel src --out-dir lib && npm run build:test",
+    "re-test": "npm run build:test && npm test",
+    "build": "babel src --out-dir lib && npm run build:test",
     "prepublishOnly": "npm run build && npm test"
   },
   "repository": {

@@ -1,6 +1,6 @@
 import e, { dev } from '../lib/index.macro'
 const test = require('ava')
-dev.libPath = '../lib'
+dev.libPath = '../'
 
 e.any.returnIt = obj => () => obj
 e.Array.take5 = array => () => array.map(() => 5)
