@@ -8,15 +8,16 @@ function extMacro({ references, babel }) {
   const { types: t, parseSync: parse } = babel
   // dev options:
   let libPath
-  references.dev.forEach(path => {
-    const parent = path.parentPath
-    if (t.isMemberExpression(parent)) {
-      if (parent.node.property.name === 'libPath') {
-        libPath = parent.parentPath.node.right.value
-        parent.parentPath.remove()
+  references.dev &&
+    references.dev.forEach(path => {
+      const parent = path.parentPath
+      if (t.isMemberExpression(parent)) {
+        if (parent.node.property.name === 'libPath') {
+          libPath = parent.parentPath.node.right.value
+          parent.parentPath.remove()
+        }
       }
-    }
-  })
+    })
 
   // if extension is used
   if (references.default[0]) {
@@ -137,7 +138,7 @@ function extMacro({ references, babel }) {
             t.identifier('extensionFn')
           ),
         ],
-        t.stringLiteral(`${libPath || 'extensions.macro'}/helpers`)
+        t.stringLiteral(`${libPath || 'extensions.macro'}/lib/helpers`)
       ),
       t.variableDeclaration('const', [
         t.variableDeclarator(
