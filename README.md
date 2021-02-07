@@ -5,13 +5,13 @@ Extension functions and parameters for JavaScript inspired by Kotlin's extension
 ## Installation
 
 ```sh
-npm i --save-dev extensions.macro
+npm i extensions.macro
 ```
 
 Or if using yarn:
 
 ```sh
-yarn add --dev extensions.macro
+yarn add extensions.macro
 ```
 
 Then just `import`:
@@ -107,7 +107,6 @@ extension.any.reduce = obj => reducer => reducer(obj)
 
 'Who let the dogs out!?'.reduce(v => `${v} wow! wow! wow!`)
 //Outputs: Who let the dogs out!? wow! wow! wow!
-
 ;[1, 2, 3].reduce((total, value) => total + value)
 //Outputs: 6
 ```
