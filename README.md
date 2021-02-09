@@ -5,7 +5,7 @@ Extension functions and parameters for JavaScript inspired by Kotlin's extension
 ## Installation
 
 ```sh
-npm i extensions.macro
+npm i extensions.macro --save
 ```
 
 Or if using yarn:
@@ -113,14 +113,14 @@ extension.any.reduce = obj => reducer => reducer(obj)
 
 ### Be aware of recursive called extension
 
-Though you can do it but it does not very performant and is considered to be blocked in future versions
+Though ~~you can do it~~ _(Since **1.0.0** it's no longer possible ❌)_ but it does not very performant and is considered to be blocked in future versions
 
 ```js
 extension.Number.factorial = num => () => {
   if (num === 1 || num === 0) return 1
   return num * (num - 1).factorial()
 }
-//Works, but it's bad ❗
+//Does not work anymore❗
 ```
 
 Do instead:
